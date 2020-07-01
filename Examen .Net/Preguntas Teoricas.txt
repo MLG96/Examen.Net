@@ -1,0 +1,49 @@
+4- Las diferencias entre .NET Framework y .NETCore son varias:
+Principalmente .NET es Core es en algunos sentidos un reboot de .NET Framework. 
+.NET Core es Open Source lo que da el pie a que miles de desarrolladores contribuyan constantemente es su evolución. Ademas Con respecto a su predecesor, es Multiplataforma (Capacidad real en funcionar en Enternos distintos al S.O. Windows por ejemplo Linux o macOS)
+.Net Core es Modular , es decir que esta formado de distintas piezas distruibuidas a traves de paquetes NuGet. .Net Core tiene mejor rendimiento que .Net FrameWork.
+
+5- Que una dato de tipo String sea inmutable, implica que el mismo no puede ser modificado a lo largo del programa y su valor, sólo pueden ser establecido en la inicialización de la variable de tipo String.
+
+6-En el caso de que usemos espacios de nombres distintos para diferenciar clases con igual nombre pero procedentes de distintos fabricantes, podrían darse conflictos. La solucion a esto seria utilizar sentencias de tipo using para importar los espacios de nombre y que de esta manera el compilador pueda determinar a cual de ellos en concreto nos referimos.
+Por ejemplo, si tenemos una clase de nombre  Hola.Clase , otra de nombre Chau.Clase
+
+namespace Hola
+{
+ class Clase
+ {
+ }
+}
+namespace Chau
+{
+ class Clase
+ {
+ }
+}
+
+y creamos un objeto de la clase "Clase"
+using Hola;
+using Chau;
+
+class ErrorPorAmbiguedad 
+{
+    static void Main()
+    {
+      Clase myClase = new Clase();
+    }
+}
+
+El compilador no puede determinar de donde deriva y producirá un error informando de que hay
+una referencia ambigua a Clase.
+El problema del ejemplo anterior se podría resolver así:
+
+using Hola;
+using Chau;
+using ClaseHola = Hola.Clase;
+class ErrorPorAmbiguedad 
+{
+   static void Main()
+   {  
+     ClaseHola myClase = new ClaseHola();
+   }
+}   
